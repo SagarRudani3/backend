@@ -3,15 +3,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Agenda = require('agenda');
 const nodemailer = require('nodemailer');
+const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const emailRoutes = require('./routes/email');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3100;
 
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('MongoDB connection error:', err));
 
 const agenda = new Agenda({ db: { address: process.env.MONGODB_URI } });
 
@@ -29,6 +30,8 @@ app.locals.agenda = agenda;
 app.locals.transporter = transporter;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/emails', emailRoutes);
