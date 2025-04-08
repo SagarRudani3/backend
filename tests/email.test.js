@@ -7,7 +7,6 @@ describe('Email Scheduling API', () => {
   let token;
 
   beforeAll(async () => {
-    // Create a test user and generate token
     const user = await User.create({
       email: 'test@test.com',
       password: 'password123'
@@ -20,7 +19,6 @@ describe('Email Scheduling API', () => {
   });
 
   afterAll(async () => {
-    // Cleanup test data
     await User.deleteMany({});
   });
 
