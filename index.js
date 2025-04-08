@@ -51,6 +51,7 @@ agenda.define('send email', async (job) => {
      html: body
     });
     console.log("%c Line:48 🍔 sendMail", "color:#fca650", sendMail);
+    
     console.log(`Email sent to ${to}`);
   } catch (error) {
     console.error('Error sending email:', error);
